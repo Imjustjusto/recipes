@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename= '/css/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <title>view</title>
+</head>
+<body class="background">
+    <div class="header">
+        <h1 class="addnew">Edit Recipe</h1>
+        <div class="navbutt">
+            <form action="/">
+                <input type="submit" value="back to recipes" class="bluetext">
+            </form>
+            <form action="/logout">
+                <input type="submit" value="logout" class="bluetext">
+            </form>
+        </div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {%if messages %}
+            {% for message in messages %}
+                <p class="fmessage2">{{message}}</p>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    <form action="/updaterecipe/{{recipe.id}}" class="bottom" method="post">
+        <div class="left">
+            <label for="name" class="entry">Name:</label>
+            <input type="text" name="name" class="namebox" value="{{recipe.name}}">
+            <label for="desc" class="entry">Description:</label>
+            <input type="text" name="desc" class="textbox" value="{{recipe.description}}">
+            <label for="instr" class="entry">Instructions:</label>
+            <input type="text" name="instr" class="textbox" value="{{recipe.instructions}}">
+        </div>
+        <div class="right">
+            <div class="datebox">
+                <label for="date" class="datelabel">Date Updated</label>
+                <input type="date" name="date" class="date">
+            </div>
+            <fieldset>
+                <legend>Under 30 Minutes?</legend>
+                <div>
+                    {%if recipe.under == 1%}
+                        <label for="pick" class="entry">Yes</label>
+                        <input type="radio" name="pick" value="yes" class="option" checked>
+                    {%elif recipe.under ==2%}
+                        <label for="pick" class="entry">Yes</label>
+                        <input type="radio" name="pick" value="yes" class="option">
+                    {%endif%}
+                </div>
+                <div>
+                    <label for="pick" class="entry">No</label>
+                    <input type="radio" name="pick" value="no" class="option">
+                </div>
+            </fieldset>
+            <input type="submit" value="Update Recipe" class="bluetext">
+        </div>
+    </form>
+</body>
+</html>

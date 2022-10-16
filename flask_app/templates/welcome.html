@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename= '/css/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <title>Welcome</title>
+</head>
+<body>
+    <div class="body">
+        <div class="loginreg">
+            <h1>Welcome {{user.first_name}}</h1>
+            <div class="row2">
+                <h2>All posted recipes:</h2>
+                <div class="twobutt">
+                    <form action="/addrecipe">
+                        <input type="submit" value="+Create" class="bluetext">
+                    </form>
+                    <form action="/logout">
+                        <input type="submit" value="logout" class="bluetext">
+                    </form>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="cell">Name</th>
+                        <th class="cell">Under</th>
+                        <th class="cell">Posted By</th>
+                        <th class="cell">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for recipe in recipes%}
+                    <tr>
+                        <td class="cell">{{recipe.name}}</td>
+                        {%if recipe.under == 1 %}
+                            <td class="cell">yes</td>
+                        {%elif recipe.under == 2 %}
+                            <td class="cell">no</td>
+                        {%endif%}
+                        <td class="cell">{{recipe.user_id}}</td>
+                        <td class="cell" id="cellbutt">
+                            <form action="/view/{{recipe.id}}">
+                                <input type="submit" value="view recipe" class="blue">
+                            </form>
+                            {%if recipe.user_id == session['user']%}
+                                <form action="/edit/{{recipe.id}}">
+                                    <input type="submit" value="edit" class="blue">
+                                </form>
+                                <form action="/delete/{{recipe.id}}">
+                                    <input type="submit" value="delete" class="blue">
+                                </form>
+                            {%endif%}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename= '/css/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <title>view</title>
+</head>
+<body>
+    <div class="loginreg">
+        <div class="header">
+            <h1>{{recipes.name}}</h1>
+            <div class="twobutt">
+                <form action="/back">
+                    <input type="submit" value="back to recipes" class="bluetext">
+                </form>
+                <div class="bluetext2">|</div>
+                <form action="/logout">
+                    <input type="submit" value="logout" class="bluetext">
+                </form>
+            </div>
+        </div>
+        <p class="bluetext2" id="right">Posted by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{user.first_name}}</p>
+        <div class="box2">
+            <div class="flex">
+                <label for="desc" class="bluetext2" id="bigger">Description:</label>
+                <p name="desc" class="entry" id="big">{{recipes.description}}</p>
+            </div>
+            <div class="flex">
+                <label for="instr" class="bluetext2" id="bigger">Instructions:</label>
+                <p name="instr" class="entry" id="big">{{recipes.instructions}}</p>
+            </div>
+            <div class="flex">
+                <label for="create" class="bluetext2" id="bigger">Date made:</label>
+                <p name="create" class="entry" id="big">{{recipes.created_at}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
